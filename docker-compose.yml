@@ -1,0 +1,25 @@
+version: '3.7'
+secrets:
+  admin_password_data:
+    file: ./admin_password_data.txt
+  tester5_password_data:
+    file: ./tester5_password_data.txt
+  tester_password_data:
+    file: ./tester_password_data.txt
+  csrf_secret_key:
+    file: ./csrf_secret_key.txt
+services:
+  web:
+    build: .
+    image: wbd220flask
+    ports:
+     - "8080:5000"
+    deploy:
+      mode: replicated
+      replicas: 4
+    secrets:
+      - source: admin_password_data
+      - source: tester5_password_data
+      - source: tester_password_data
+      - source: csrf_secret_key
+

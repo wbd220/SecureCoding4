@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}History Page{% endblock %}
+
+{% block content %}
+        {% with messages = get_flashed_messages(with_categories = true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div>
+            {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>Welcome to the WBD220 Query History Page</h1>
+    <form  action="" method="post">
+        {{ form.hidden_tag() }}
+    <p>
+        {{ form.userquery }}<br>
+        {{ form.submit }}
+    </p>
+    </form>
+    <p> number of queries: {{ numberofquery }}</p>
+
+    {% for x in queryhistoryquery %}
+        {% set urlofrequest %}{{ request.host_url }}{% endset %}
+    <p>
+        <a href="{{ urlofrequest }}history/query{{x.record_number}}" id="query{{ x.record_number }}">
+            "Query{{ x.record_number }}"</a><br>
+    </p>
+    {% endfor %}
+{% endblock %}
